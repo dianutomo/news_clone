@@ -1,6 +1,6 @@
 # news_clone
 
-A new Flutter project.
+Learn API
 
 ## Getting Started
 

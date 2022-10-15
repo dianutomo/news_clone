@@ -1,16 +1,15 @@
 // To parse this JSON data, do
 //
-//     final articleModel = articleModelFromJson(jsonString);
+//     final NewsModel = NewsModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ArticleModel articleModelFromJson(String str) =>
-    ArticleModel.fromJson(json.decode(str));
+NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
 
-String articleModelToJson(ArticleModel data) => json.encode(data.toJson());
+String newsModelToJson(NewsModel data) => json.encode(data.toJson());
 
-class ArticleModel {
-  ArticleModel({
+class NewsModel {
+  NewsModel({
     required this.source,
     required this.author,
     required this.title,
@@ -30,7 +29,7 @@ class ArticleModel {
   DateTime? publishedAt;
   String? content;
 
-  factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
+  factory NewsModel.fromJson(Map<String, dynamic> json) => NewsModel(
         source: Source.fromJson(json["source"]),
         author: json["author"],
         title: json["title"],
