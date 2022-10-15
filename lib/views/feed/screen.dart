@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:news_clone/api/api_call.dart';
-import 'package:news_clone/models/article_model.dart';
-import 'package:news_clone/views/feed/widget/list_tile.dart';
+import 'package:news_clone/models/feed_model.dart';
+import 'package:news_clone/views/news/widget/list_tile.dart';
 
-class FeedScreen extends StatefulWidget {
-  const FeedScreen({super.key});
+class FeedsScreen extends StatefulWidget {
+  const FeedsScreen({super.key});
 
   @override
-  State<FeedScreen> createState() => _FeedScreenState();
+  State<FeedsScreen> createState() => _FeedsScreenState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class _FeedsScreenState extends State<FeedsScreen> {
   APICall client = APICall();
 
   @override
@@ -18,18 +18,18 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('News Clone'),
+        title: const Text('Passion News'),
       ),
       body: FutureBuilder(
-        future: client.getArticles(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<ArticleModel>?> snapshot) {
+        future: client.getFeeds(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<FeedModel>?> snapshot) {
           if (snapshot.hasData) {
-            List<ArticleModel>? articles = snapshot.data;
+            List<FeedModel>? feeds = snapshot.data;
             return ListView.builder(
-              itemCount: articles!.length,
+              itemCount: feeds!.length,
               itemBuilder: (context, index) => listTile(
-                articles[index],
+                feeds[index],
                 context,
               ),
             );
