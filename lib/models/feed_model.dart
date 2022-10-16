@@ -3,6 +3,7 @@
 //     final feedModel = feedModelFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:news_clone/constants/url_constants.dart';
 
 FeedModel feedModelFromJson(String str) => FeedModel.fromJson(json.decode(str));
 
@@ -63,7 +64,7 @@ class FeedModel {
         id: json["id"],
         title: json["title"],
         imageThumbnail: json["image_thumbnail"],
-        image: json["image"],
+        image: UrlConstants.assetsUrl + json["image"],
         altImg: json["alt_img"],
         titleImg: json["title_img"],
         description: json["description"],

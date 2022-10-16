@@ -35,7 +35,7 @@ Widget listTile(FeedModel feed, BuildContext context) {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(article.urlToImage.toString()),
+                image: NetworkImage(feed.image.toString()),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(12.0),
@@ -51,7 +51,7 @@ Widget listTile(FeedModel feed, BuildContext context) {
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Text(
-              article.source.name,
+              feed.publishDate.toString(),
               style: const TextStyle(
                 color: Colors.white,
               ),
@@ -61,7 +61,7 @@ Widget listTile(FeedModel feed, BuildContext context) {
             height: 8.0,
           ),
           Text(
-            article.title.toString(),
+            feed.title.toString(),
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

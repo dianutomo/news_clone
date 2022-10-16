@@ -1,17 +1,16 @@
-///===== Cara pertama untuk menampilkan API
 import 'package:flutter/material.dart';
 import 'package:news_clone/api/api_call.dart';
-import 'package:news_clone/models/news_model.dart';
-import 'package:news_clone/views/news/widget/list_tile.dart';
+import 'package:news_clone/models/feed_model.dart';
+import 'package:news_clone/views/feed/widget/list_tile.dart';
 
-class NewsScreen extends StatefulWidget {
-  const NewsScreen({super.key});
+class FeedsScreen extends StatefulWidget {
+  const FeedsScreen({super.key});
 
   @override
-  State<NewsScreen> createState() => _NewsScreenState();
+  State<FeedsScreen> createState() => _FeedsScreenState();
 }
 
-class _NewsScreenState extends State<NewsScreen> {
+class _FeedsScreenState extends State<FeedsScreen> {
   APICall client = APICall();
 
   @override
@@ -19,18 +18,18 @@ class _NewsScreenState extends State<NewsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('News Clone'),
+        title: const Text('Passion News'),
       ),
       body: FutureBuilder(
-        future: client.getArticles(),
+        future: client.getFeeds(),
         builder:
-            (BuildContext context, AsyncSnapshot<List<NewsModel>?> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<FeedModel>?> snapshot) {
           if (snapshot.hasData) {
-            List<NewsModel>? articles = snapshot.data;
+            List<FeedModel>? feeds = snapshot.data;
             return ListView.builder(
-              itemCount: articles!.length,
+              itemCount: feeds!.length,
               itemBuilder: (context, index) => listTile(
-                articles[index],
+                feeds[index],
                 context,
               ),
             );

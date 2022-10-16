@@ -1,44 +1,55 @@
-import 'package:flutter/material.dart';
-import 'package:news_clone/api/api_call.dart';
-import 'package:news_clone/models/feed_model.dart';
-import 'package:news_clone/views/news/widget/list_tile.dart';
+import 'dart:convert';
 
-class FeedsScreen extends StatefulWidget {
-  const FeedsScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:news_clone/constants/url_constants.dart';
+import 'package:news_clone/models/feed_model.dart';
+import 'package:news_clone/views/feed/widget/feed_widget.dart';
+import 'package:news_clone/views/feed/widget/loading_widget.dart';
+import 'package:http/http.dart' as http;
+
+class Feed extends StatefulWidget {
+  const Feed({super.key});
 
   @override
-  State<FeedsScreen> createState() => _FeedsScreenState();
+  State<Feed> createState() => _FeedState();
 }
 
-class _FeedsScreenState extends State<FeedsScreen> {
-  APICall client = APICall();
+class _FeedState extends State<Feed> {
+  List<FeedModel> feedData = [];
+  bool loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchFeed();
+  }
+
+  void fetchFeed() async {
+    loading = true;
+    var response = await http.get(Uri.parse(UrlConstants.feedApi));
+    setState(() {
+      var data = json.decode(response.body);
+      if (data['status'] == 1) {
+        feedData = List<FeedModel>.from(data["result"]["data"]
+            .map((data) => FeedModel.fromJson(data))
+            .toList());
+      } else {
+        feedData = [];
+      }
+    });
+    loading = false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Passion News'),
-      ),
-      body: FutureBuilder(
-        future: client.getFeeds(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<FeedModel>?> snapshot) {
-          if (snapshot.hasData) {
-            List<FeedModel>? feeds = snapshot.data;
-            return ListView.builder(
-              itemCount: feeds!.length,
-              itemBuilder: (context, index) => listTile(
-                feeds[index],
-                context,
-              ),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      ),
+    return Container(
+      child: loading
+          ? const LoadingWidget()
+          : Scrollbar(
+              child: ListView.builder(
+              itemCount: feedData.length,
+              itemBuilder: (c, i) => FeedWidget(feedData: feedData[i]),
+            )),
     );
   }
 }

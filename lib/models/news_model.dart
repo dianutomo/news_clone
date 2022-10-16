@@ -2,11 +2,12 @@
 //
 //     final NewsModel = NewsModelFromJson(jsonString);
 
-import 'dart:convert';
+//import 'dart:convert';
 
-NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
+// List<NewsModel> newsModelFromJson(String str) =>
+//     List<NewsModel>.from(json.decode(str).map((x) => NewsModel.fromJson(x)));
 
-String newsModelToJson(NewsModel data) => json.encode(data.toJson());
+//String newsModelToJson(NewsModel data) => json.encode(data.toJson());
 
 class NewsModel {
   NewsModel({
@@ -40,16 +41,16 @@ class NewsModel {
         content: json["content"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "source": source.toJson(),
-        "author": author,
-        "title": title,
-        "description": description,
-        "url": url,
-        "urlToImage": urlToImage,
-        "publishedAt": publishedAt!.toIso8601String(),
-        "content": content,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "source": source.toJson(),
+  //       "author": author,
+  //       "title": title,
+  //       "description": description,
+  //       "url": url,
+  //       "urlToImage": urlToImage,
+  //       "publishedAt": publishedAt!.toIso8601String(),
+  //       "content": content,
+  //     };
 }
 
 class Source {
@@ -66,8 +67,8 @@ class Source {
         name: json["name"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "id": id,
+  //       "name": name,
+  //     };
 }
