@@ -7,9 +7,12 @@ import 'package:news_clone/models/news_model.dart';
 import 'package:news_clone/models/feed_model.dart';
 
 class APICall {
+  List<FeedModel> feedData = [];
+
   ///===== Cara pertama untuk melakukan pemanggilan API
   Future<List<NewsModel>?> getArticles() async {
-    http.Response response = await http.get(Uri.parse(UrlConstants.newsApi));
+    http.Response response = await http.get(Uri.parse(UrlConstants.feedApi));
+    print(response.statusCode);
     if (response.statusCode == 200) {
       Map<String, dynamic> json = jsonDecode(response.body);
       List<dynamic> body = json['articles'];

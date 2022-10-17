@@ -29,7 +29,7 @@ class _FeedState extends State<Feed> {
     loading = true;
     var response = await http.get(Uri.parse(UrlConstants.feedApi));
     setState(() {
-      var data = json.decode(response.body);
+      var data = jsonDecode(response.body);
       if (data['status'] == 1) {
         feedData = List<FeedModel>.from(data["result"]["data"]
             .map((data) => FeedModel.fromJson(data))

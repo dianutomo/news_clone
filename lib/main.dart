@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_clone/views/feed/screen_bak.dart';
 import 'package:news_clone/views/feed/screen.dart';
-//import 'package:news_clone/views/news/screen.dart';
+import 'package:news_clone/views/feed/screen_bak.dart';
+import 'package:news_clone/views/news/screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Feed(),
+      home: const NewsScreen(),
     );
   }
 }
