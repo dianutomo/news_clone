@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:news_clone/models/news_model.dart';
+import 'package:news_clone/models/feed_model.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key, required this.article}) : super(key: key);
 
-  final NewsModel article;
+  final FeedModel article;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class DetailPage extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(article.urlToImage.toString()),
+                    image: NetworkImage(article.image.toString()),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(12.0),
@@ -45,7 +45,7 @@ class DetailPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: Text(
-                  article.source.name,
+                  article.createdBy,
                   style: const TextStyle(
                     color: Colors.white,
                   ),

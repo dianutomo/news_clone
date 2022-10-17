@@ -5,13 +5,13 @@ import 'package:news_clone/views/news/widget/detail_page.dart';
 Widget listTile(NewsModel article, BuildContext context) {
   return InkWell(
     onTap: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailPage(
-              article: article,
-            ),
-          ));
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => DetailPage(
+      //         article: article,
+      //       ),
+      //     ));
     },
     child: Container(
       //margin: EdgeInsets.all(12.0),

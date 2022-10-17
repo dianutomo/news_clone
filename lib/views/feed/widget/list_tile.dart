@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:news_clone/models/feed_model.dart';
-//import 'package:news_clone/views/feed/widget/detail_page.dart';
+import 'package:news_clone/views/feed/widget/detail_page.dart';
 
 Widget listTile(FeedModel feed, BuildContext context) {
   return InkWell(
     onTap: () {
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => DetailPage(
-      //         article: article,
-      //       ),
-      //     ));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailPage(
+              feed: feed,
+            ),
+          ));
     },
     child: Container(
       //margin: EdgeInsets.all(12.0),

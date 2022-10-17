@@ -12,6 +12,14 @@ class FeedsScreen extends StatefulWidget {
 
 class _FeedsScreenState extends State<FeedsScreen> {
   APICall client = APICall();
+  List<FeedModel> feedData = [];
+  bool loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    client.getFeeds();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +28,17 @@ class _FeedsScreenState extends State<FeedsScreen> {
         centerTitle: true,
         title: const Text('Passion News'),
       ),
-      body: FutureBuilder(
-        future: client.getFeeds(),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<FeedModel>?> snapshot) {
-          if (snapshot.hasData) {
-            List<FeedModel>? feeds = snapshot.data;
-            return ListView.builder(
-              itemCount: feeds!.length,
-              itemBuilder: (context, index) => listTile(
-                feeds[index],
-                context,
+      body: SizedBox(
+        child: loading
+            ? const CircularProgressIndicator()
+            : ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: feedData.length,
+                itemBuilder: (context, index) => listTile(
+                  feedData[index],
+                  context,
+                ),
               ),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
       ),
     );
   }

@@ -4,17 +4,21 @@ import 'package:news_clone/constants/color_constants.dart';
 import 'package:news_clone/constants/gradient_constants.dart';
 import 'package:news_clone/constants/math_utils.dart';
 import 'package:news_clone/models/feed_model.dart';
+//import 'package:news_clone/views/news/widget/detail_page.dart';
 import 'package:news_clone/widgets/common_image_view.dart';
 
+import 'package:news_clone/views/feed/widget/detail_page_backup.dart';
+import 'package:flutter_html/flutter_html.dart';
+
 class FeedWidget extends StatelessWidget {
-  // final List<FeedModel> feedData;
+  //final List<FeedModel> feedData;
   final FeedModel feedData;
   const FeedWidget({required this.feedData, super.key});
 
   @override
   Widget build(BuildContext context) {
     Container body = Container(
-      // color: ColorConstants.whiteColor,
+      color: ColorConstants.whiteColor,
       child: Padding(
         padding: getPadding(top: 20, left: 20, right: 20),
         child: Container(
@@ -78,6 +82,19 @@ class FeedWidget extends StatelessWidget {
         ),
       ),
     );
-    return body;
+    return Material(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailPage(
+                  article: feedData,
+                ),
+              ));
+        },
+        child: body,
+      ),
+    );
   }
 }

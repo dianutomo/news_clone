@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:news_clone/models/news_model.dart';
+import 'package:news_clone/models/feed_model.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key, required this.article}) : super(key: key);
+  const DetailPage({Key? key, required this.feed}) : super(key: key);
 
-  final NewsModel article;
+  final FeedModel feed;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          article.title.toString(),
+          feed.title.toString(),
           softWrap: true,
         ),
         backgroundColor: Colors.black,
@@ -29,7 +29,7 @@ class DetailPage extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(article.urlToImage.toString()),
+                    image: NetworkImage(feed.image.toString()),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(12.0),
@@ -45,7 +45,7 @@ class DetailPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: Text(
-                  article.source.name,
+                  feed.createdBy,
                   style: const TextStyle(
                     color: Colors.white,
                   ),
@@ -55,7 +55,7 @@ class DetailPage extends StatelessWidget {
                 height: 8.0,
               ),
               Text(
-                article.description.toString(),
+                feed.description.toString(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

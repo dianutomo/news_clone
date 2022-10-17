@@ -21,25 +21,15 @@ class APICall {
     }
   }
 
-  // Future<List<NewsModel>?> getArticles() async {
-  //   var url = Uri.parse(UrlConstants.newsApi);
-  //   var response = await http.get(url);
-  //   if (response.statusCode == 200) {
-  //     List<NewsModel> model = newsModelFromJson(response.body);
-  //     return model;
-  //   } else {
-  //     throw ('Cannot connect to api');
-  //   }
-  // }
-
   Future<List<FeedModel>?> getFeeds() async {
     http.Response response = await http.get(Uri.parse(UrlConstants.feedApi));
     if (response.statusCode == 200) {
       Map<String, dynamic> json = jsonDecode(response.body);
-      List<dynamic>? body = json['feeds'];
-      List<FeedModel> feeds =
-          body!.map((dynamic item) => FeedModel.fromJson(item)).toList();
-      return feeds;
+      print(json['result']['data']);
+      List<FeedModel> feedData = List<FeedModel>.from(json["result"]["data"]
+          .map((data) => FeedModel.fromJson(data))
+          .toList());
+      return feedData;
     } else {
       throw ('Cannot connect to api');
     }
